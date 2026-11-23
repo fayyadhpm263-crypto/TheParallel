@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,17 +20,15 @@ jobs:
         with:
           gradle-version: '8.8'
 
-      - name: Extract ZIP
-        run: |
-          mkdir project
-          unzip TheParallel_Project_Upload.zip -d project
+      - name: Extract project
+        run: unzip TheParallel_Simple_Build_Test.zip -d project
 
-      - name: Build
+      - name: Build mod
         run: |
-          cd project
+          cd project/TheParallel_Simple
           gradle build
 
       - uses: actions/upload-artifact@v4
         with:
           name: TheParallel-Mod
-          path: project/build/libs/*.jar
+          path: project/TheParallel_Simple/build/libs/*.jar
